@@ -21,11 +21,11 @@ This project is about a fictitious car shop that I imagined. I will try to creat
 
   1. Clone the repository:
 
-    git clone git@github.com:CamiloACarvalho/shopCar.git
+    git clone git@github.com:CamiloACarvalho/miloMotors.git
 
   2. Navigate to the project directory:
 
-    cd shopCar
+    cd miloMotors
 
   3. Install dependencies:
 
@@ -37,10 +37,5 @@ This project is about a fictitious car shop that I imagined. I will try to creat
 
   _The application will be available at http://localhost:3001._
 
-  -  Scripts Disponíveis
-      -  `npm run build`: Compila o projeto para produção.
-      -  `npm run test`: Executa os testes do projeto.
-      -  `npm run lint`: Verifica a conformidade do código com as regras de estilo.
-      -  `npm run lint:styles`: Verifica a conformidade dos estilos com as regras de estilo.
-      -  `npm run cy`: Executa os testes de integração com Cypress.
-      -  `npm run cy:open`: Abre o Cypress para testes de integração interativos.
+  -  Available Scripts
+
