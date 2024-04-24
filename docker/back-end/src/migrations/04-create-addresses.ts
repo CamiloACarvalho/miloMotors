@@ -47,7 +47,6 @@ export default {
       clientId: {
         type: DataTypes.INTEGER,
         field: 'client_id',
-        // foringKey: true,
         references: {
           model: 'Client',
           key: 'client_id',
@@ -58,7 +57,6 @@ export default {
       sellerId: {
         type: DataTypes.INTEGER,
         field: 'seller_id',
-        // foringKey: true,
         references: {
           model: 'Seller',
           key: 'seller_id',

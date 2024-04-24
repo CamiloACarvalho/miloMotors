@@ -70,7 +70,6 @@ export default {
         allowNull: false,
         type: DataTypes.INTEGER,
         field: 'address_id',
-        // foringKey: true,
         references: {
           model: 'Address',
           key: 'address_id',

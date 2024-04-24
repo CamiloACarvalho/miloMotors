@@ -8,14 +8,14 @@
     "start": "node .",
     "dev": "nodemon .",
     "lint": "eslint .",
-    "drop": "npx sequelize-cli db:drop",
-    "seed": "npx sequelize-cli db:seed:all",
-    "db": "npx sequelize-cli db:create",
-    "migrate": "npx sequelize-cli db:migrate"
+    "drop": "npx sequelize db:drop",
+    "seed": "npx sequelize db:seed:all",
+    "db": "npx sequelize db:create",
+    "migrate": "npx sequelize db:migrate"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
     "jsonwebtoken": "9.0.0",
