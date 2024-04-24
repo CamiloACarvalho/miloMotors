@@ -1,52 +1,53 @@
-'use strict';
+import { Model, QueryInterface, DataTypes } from 'sequelize'; 
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('adresses', { 
+import { AddressType } from '../types/address';
+
+export default {
+  up (queryInterface: QueryInterface) {
+    return queryInterface.createTable<Model<AddressType>>('adresses', { 
       addressId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'address_id',
       },
       street: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       number: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
       },
       complement: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       zipCode: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         field: 'zip_code',
       },
       neighborhood: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       city: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       state: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       country: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       clientId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'client_id',
-        foringKey: true,
+        // foringKey: true,
         references: {
           model: 'Client',
           key: 'client_id',
@@ -55,9 +56,9 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       sellerId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'seller_id',
-        foringKey: true,
+        // foringKey: true,
         references: {
           model: 'Seller',
           key: 'seller_id',
@@ -68,7 +69,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('adresses');
+  down (queryInterface: QueryInterface) {
+    return queryInterface.dropTable('adresses');
   }
 };

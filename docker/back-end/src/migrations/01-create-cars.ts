@@ -1,68 +1,69 @@
-'use strict';
+import { Model, QueryInterface, DataTypes } from 'sequelize'; 
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('cars', {
+import { CarType } from '../types/car';
+
+export default {
+  up (queryInterface: QueryInterface) {
+    return queryInterface.createTable<Model<CarType>>('cars', {
       carId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'car_id'
       },
       brand: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       model: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       version: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       plate: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       manufactureYear: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'manufacture_year'
       },
       modelYear: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'model_year'
       },
       color: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       type: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       purchasePrice: {
         allowNull: false,
-        type: Sequelize.DECIMAL(20, 2),
+        type: DataTypes.DECIMAL(20, 2),
         field: 'purchase_price',
       },
       salePrice: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         field: 'sale_price'
       },
       isAvailable: {
         allowNull: false,
-        type: Sequelize.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         field: 'is_available'
       }
     });
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('cars');
+  down (queryInterface: QueryInterface) {
+    return queryInterface.dropTable('cars');
   }
 };

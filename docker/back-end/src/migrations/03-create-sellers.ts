@@ -1,72 +1,73 @@
-'use strict';
+import { Model, QueryInterface, DataTypes } from 'sequelize'; 
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('sellers', {
+import { SellerType } from '../types/seller';
+
+export default {
+  up (queryInterface: QueryInterface) {
+    return queryInterface.createTable<Model<SellerType>>('sellers', {
       sellerId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'seller_id'
       },
       fullName: {
         allowNull: false,
-        type: Sequelize.STRING(100),
+        type: DataTypes.STRING(100),
         field: 'full_name'
       },
       password: {
         allowNull: false,
-        type: Sequelize.STRING(16),
+        type: DataTypes.STRING(16),
       },
       birthday: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: DataTypes.DATE
       },
       cpf: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       nacionality: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       phoneNumber: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         field: 'phone_number'
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       gender: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       jobOccupation: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         field: 'job_occupation'
       },
       bank: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: DataTypes.STRING
       },
       commission: {
         allowNull: false,
-        type: Sequelize.DECIMAL(20, 2)
+        type: DataTypes.DECIMAL(20, 2)
       },
       salesQuantity: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'sales_quantity'
       },
       addressId: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         field: 'address_id',
-        foringKey: true,
+        // foringKey: true,
         references: {
           model: 'Address',
           key: 'address_id',
@@ -77,7 +78,7 @@ module.exports = {
     });
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('sellers');
+  down (queryInterface: QueryInterface) {
+    return queryInterface.dropTable('sellers');
   }
 };

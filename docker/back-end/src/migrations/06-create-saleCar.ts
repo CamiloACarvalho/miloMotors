@@ -1,11 +1,12 @@
-'use strict';
+import { Model, QueryInterface, DataTypes } from 'sequelize'; 
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('sale_cars', {
+import { SaleCarType } from '../types/salCar';
+
+export default {
+  up (queryInterface: QueryInterface) {
+    return queryInterface.createTable<Model<SaleCarType>>('sale_cars', {
       saleId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'sale_id',
         references: {
@@ -16,7 +17,7 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       sellerId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'serller_id',
         references: {
@@ -27,7 +28,7 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       clientId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'client_id',
         references: {
@@ -38,7 +39,7 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       carId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         field: 'car_id',
         references: {
@@ -51,8 +52,8 @@ module.exports = {
     });
   },
  
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('sale_cars');
+  down (queryInterface: QueryInterface) {
+    return queryInterface.dropTable('sale_cars');
   }
 };
  
