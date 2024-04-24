@@ -1,9 +1,7 @@
-'use strict';
+import { QueryInterface } from 'sequelize';
 
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
-  async up (queryInterface, Sequelize) {
-    // Inserindo registros na tabela
+export default {
+  up: async (queryInterface: QueryInterface) => {
     await queryInterface.bulkInsert('cars',
     [
       {
@@ -139,9 +137,9 @@ module.exports = {
     ]);
   },
 
-  async down (queryInterface, Sequelize) {
+  down: async (queryInterface: QueryInterface) => {
     // Deletando todos os registros da tabela
-    await queryInterface.bulkDelete('cars', null, {});
+    await queryInterface.bulkDelete('cars', {});
     // Deleta com base em registros específicos
     // await Car.destroy({ where: {} });
   },
