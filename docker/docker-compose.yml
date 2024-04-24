@@ -1,0 +1,72 @@
+# Versão do formato do arquivo docker-compose. A versão 3.1 é uma das versões mais recentes e amplamente utilizadas.
+version: '3'
+# Define os serviços que serão executados como contêineres Docker.
+services: 
+  # Nome do serviço para o banco de dados MySQL.
+  database:
+    # Usa a imagem MySQL na versão 8.0.32.
+    image: mysql:8.0.32
+    # Define o nome do contêiner para o serviço de banco de dados como "shopping_car".
+    container_name: miloMotors_database
+    # Configura as variáveis de ambiente para definir a senha do root e o nome do banco de dados MySQL.
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: ShopCar
+    # Mapeia a porta 3306 do host para a porta 3306 do contêiner MySQL, permitindo conexão com o banco de dados usando um cliente MySQL local.
+    ports:
+      - 3306:3306
+    # Define um teste de saúde para verificar se o MySQL está pronto para aceitar conexões.
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+  backend:
+    # Constrói a imagem do contêiner a partir do diretório atual, que contém o Dockerfile para a aplicação.
+    build: ./back-end
+    # Garante que o contêiner seja sempre reiniciado em caso de falha.
+    restart: always
+    # Define o nome do contêiner para o serviço da API como "shopping_car_api".
+    container_name: miloMotors_back
+    # Mapeia a porta 3001 do host para a porta 3001 do contêiner, onde a API estará rodando.
+    ports:
+      - 3000:3000
+    # Define variáveis de ambiente para configurar a conexão com o banco de dados e a porta da API.
+    environment:
+      - MYSQL_HOST=db # Define o host do banco de dados para a conexão da API.
+      - MYSQL_NAME=ShopCar # Define o nome do banco de dados para a conexão da API.
+      - MYSQL_USER=root # Define o usuário do banco de dados para a conexão da API.
+      - MYSQL_PASSWORD=password # Define a senha do banco de dados para a conexão da API.
+      - API_PORT=3001 # Define a porta em que a API estará rodando.
+      - JWT_SECRET=${JWT_SECRET}
+    # Monta o diretório atual (onde está o código-fonte da aplicação) para dentro do contêiner em "/app".
+    volumes:
+      - ./:/app
+    # Define o usuário que executará o processo dentro do contêiner como "node".
+    user: node
+    # As duas opções abaixo correspondem ao -it
+    tty: true # Habilita a alocação de um pseudo-terminal dentro do contêiner.
+    stdin_open: true # Abre o stdin dentro do contêiner, permitindo interação com o terminal.
+    # Define que o contêiner da API depende do contêiner do banco de dados, garantindo que o banco de dados esteja pronto antes da API iniciar.
+    depends_on:
+      - database
+  # Criando um container para o front-end
+  frontend:
+    # Constrói a imagem do contêiner a partir do diretório atual, que contém o Dockerfile para a aplicação.
+    build: ./front-end
+    # Garante que o contêiner seja sempre reiniciado em caso de falha.
+    restart: always
+    # Define o nome do contêiner para o serviço da API como "shopping_car_api".
+    container_name: miloMotors_front
+    # Aqui estamos mapeando a porta 3000 do contêiner para a porta 3000 do host. Isso significa que podemos acessar o aplicativo em http://localhost:3000.
+    ports:
+      - "3001:3001"
+    # Aqui estamos definindo uma variável de ambiente que será usada pelo aplicativo para acessar o backend.
+    # Isso é necessário porque o aplicativo frontend e o backend estão em contêineres separados.
+    environment:
+    # Já aqui, estamos usando o container todoback que foi o container criado dentro service
+      - REACT_APP_API_HOST=backend
+    # Aqui estamos dizendo que este serviço depende do serviço todobackend.
+    # Isso significa que o serviço todofrontend só será iniciado depois que o serviço todobackend estiver pronto.
+    depends_on:
+    # Mesma coisa aqui, o todoback é o nome do container que foi criado dentro do service para o backend
+      - backend

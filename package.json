@@ -1,0 +1,30 @@
+{
+  "name": "milomotors",
+  "version": "1.0.0",
+  "description": "This project is about a fictitious car shop that I imagined. I will try to create a back-end to relate cars, sellers, clients, sales, and other things that I deemed important. I created this repository with the objective to practice Sequelize and database relationships.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CamiloACarvalho/miloMotors.git"
+  },
+  "keywords": [
+    "shop",
+    "car",
+    "sales",
+    "sellers",
+    "clients"
+  ],
+  "author": "Camilo Augusto Carvalho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CamiloACarvalho/miloMotors/issues"
+  },
+  "homepage": "https://github.com/CamiloACarvalho/miloMotors#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "eslint": "^9.1.1"
+  }
+}
